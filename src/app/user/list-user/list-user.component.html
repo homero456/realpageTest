@@ -1,3 +1,25 @@
-<p>
-  list-user works!
-</p>
+<div class="row">
+
+  <div> <button class="btn btn-info" (click)="addUser()" style="margin-left: 20px;"> Add User</button></div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">UserName</th>
+      <th scope="col">Password</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of listUsers" >
+      <th scope="row">{{u.ID}}</th>
+      <td>{{u.UserName}}</td>
+      <td>{{u.Password}}</td>
+      <td><button class="btn btn-info" (click)="editUser(u)" style="margin-left: 20px;"> Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteUser(u)"> Delete</button></td>  
+    </tr>
+    
+  </tbody>
+</table>
+</div>
