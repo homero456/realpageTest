@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-user',
@@ -16,7 +17,7 @@ export class AddUserComponent implements OnInit {
 
 
 
-  constructor(private route: Router, private userService: UserService) { }
+  constructor(private route: Router, private userService: UserService,private toastr: ToastrService) { }
 
   ngOnInit() {
     this.user = new User();
@@ -34,10 +35,11 @@ export class AddUserComponent implements OnInit {
 
   save() {
     this.userService.saveUser(this.user).subscribe(u => {
-      alert("User has been added");
+      this.toastr.success('User has been added', 'User');
       this.route.navigate(['']);
     }, error => {
-      console.log('error = ', error);
+      this.toastr.warning('error list= ' + error, 'User');
+        console.log('error = ', error);
 
     });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-user',
@@ -11,11 +12,12 @@ import { User } from 'src/app/models/user';
 export class ListUserComponent implements OnInit {
 
   public listUsers: any;
-  constructor(private route: Router, private serviceUser: UserService) {
+  constructor(private route: Router, private serviceUser: UserService,private toastr: ToastrService) {
     serviceUser.getUsers().subscribe(s => {
       this.listUsers = s;
       console.log(this.listUsers);
     }, error => {
+      this.toastr.warning('error = ' + error, 'User');
       console.log('error = ', error);
 
     });
@@ -28,13 +30,16 @@ export class ListUserComponent implements OnInit {
       this.serviceUser.getUsers().subscribe(s => {
         this.listUsers = s;
         console.log("delete")
-        alert("User has been deleted");
+        this.toastr.success('User has been deleted', 'User');
       }, error => {
-        console.log('error list = ', error);
+        this.toastr.warning('error list= ' + error, 'User');
+        console.log('error = ', error);
+  
   
       });
     }, error => {
-      console.log('error delete= ', error);
+      this.toastr.warning('error delete = ' + error, 'User');
+      console.log('error delete = ', error);
 
     });
   };
