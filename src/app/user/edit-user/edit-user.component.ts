@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EditUserComponent implements OnInit {
   public user: User;
   formGroup: FormGroup;
-  constructor(private route: Router, private userService: UserService,private toastr: ToastrService) {
+  constructor(private route: Router, private userService: UserService, private toastr: ToastrService) {
 
   }
 
@@ -52,6 +52,10 @@ export class EditUserComponent implements OnInit {
       console.log('error = ', error);
     }
     );
+  }
+  
+  cancel() {
+    this.route.navigate(['']);
   }
 
 }
